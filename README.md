@@ -1,5 +1,14 @@
 # Demo Bradesco 🚀
+
+=======
+# Demo Bradesco 🚀
 >>>>>>> 1ba823e (docs: remove references to POC Tiago from README)
+### Angular 21 + FastAPI (Python) + SQLite
+=======
+# Demo Bradesco 🚀
+
+### Angular 21 + FastAPI (Python) + SQLite
+
 =======
 # Demo Bradesco 🚀
 
