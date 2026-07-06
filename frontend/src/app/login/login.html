@@ -1,0 +1,146 @@
+<div class="login-container">
+  <div class="login-card">
+    <header class="login-header">
+      <div class="logo-placeholder">POC</div>
+      <h1>SISTEMA POC TIAGO</h1>
+      <p class="subtitle">Frontend Angular 21 + Backend Python SQLite</p>
+    </header>
+
+    <!-- Exibição de Mensagens de Erro -->
+    @if (errorMessage()) {
+      <div class="alert alert-error" role="alert" aria-live="polite">
+        <span class="alert-icon">⚠️</span>
+        <span class="alert-text">{{ errorMessage() }}</span>
+      </div>
+    }
+
+    <!-- Exibição de Mensagens de Sucesso -->
+    @if (successMessage()) {
+      <div class="alert alert-success" role="alert" aria-live="polite">
+        <span class="alert-icon">✅</span>
+        <span class="alert-text">{{ successMessage() }}</span>
+      </div>
+    }
+
+    @if (isLoginMode()) {
+      <!-- Formulário de LOGIN -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="auth-form" aria-label="Formulário de Login">
+        <div class="form-group">
+          <label for="username">Nome de Usuário</label>
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            placeholder="Digite seu usuário (Ex: admin)"
+            autocomplete="username"
+            [attr.aria-invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+          />
+          @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
+            <span class="form-error">O usuário deve ter pelo menos 3 caracteres.</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="Digite sua senha (Ex: admin123)"
+            autocomplete="current-password"
+            [attr.aria-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+          />
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <span class="form-error">A senha deve ter pelo menos 4 caracteres.</span>
+          }
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn btn-primary" 
+          [disabled]="loginForm.invalid || isLoading()"
+          aria-live="polite"
+        >
+          @if (isLoading()) {
+            <span class="spinner" aria-hidden="true"></span>
+            Entrando...
+          } @else {
+            Entrar no Sistema
+          }
+        </button>
+
+        <p class="switch-mode-text">
+          Não tem uma conta? 
+          <button type="button" class="btn-link" (click)="toggleMode()">Registre-se aqui</button>
+        </p>
+      </form>
+    } @else {
+      <!-- Formulário de REGISTRO -->
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()" class="auth-form" aria-label="Formulário de Registro">
+        <div class="form-group">
+          <label for="reg-username">Nome de Usuário</label>
+          <input
+            type="text"
+            id="reg-username"
+            formControlName="username"
+            placeholder="Escolha um nome de usuário único"
+            autocomplete="username"
+            [attr.aria-invalid]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched"
+          />
+          @if (registerForm.get('username')?.invalid && registerForm.get('username')?.touched) {
+            <span class="form-error">O nome de usuário deve ter pelo menos 3 caracteres.</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="reg-fullName">Nome Completo</label>
+          <input
+            type="text"
+            id="reg-fullName"
+            formControlName="fullName"
+            placeholder="Digite seu nome completo"
+            autocomplete="name"
+            [attr.aria-invalid]="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched"
+          />
+          @if (registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched) {
+            <span class="form-error">O nome completo deve ter pelo menos 3 caracteres.</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="reg-password">Senha de Acesso</label>
+          <input
+            type="password"
+            id="reg-password"
+            formControlName="password"
+            placeholder="Crie uma senha forte"
+            autocomplete="new-password"
+            [attr.aria-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+          />
+          @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+            <span class="form-error">A senha deve ter pelo menos 4 caracteres.</span>
+          }
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn btn-secondary" 
+          [disabled]="registerForm.invalid || isLoading()"
+          aria-live="polite"
+        >
+          @if (isLoading()) {
+            <span class="spinner" aria-hidden="true"></span>
+            Cadastrando...
+          } @else {
+            Criar Conta Grátis
+          }
+        </button>
+
+        <p class="switch-mode-text">
+          Já possui cadastro? 
+          <button type="button" class="btn-link" (click)="toggleMode()">Faça login</button>
+        </p>
+      </form>
+    }
+  </div>
+</div>
