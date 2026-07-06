@@ -1,7 +1,15 @@
-# Demo Bradesco🚀
+# Demo Bradesco 🚀
+>>>>>>> 1ba823e (docs: remove references to POC Tiago from README)
+=======
+# Demo Bradesco 🚀
+
+=======
+# Demo Bradesco 🚀
+>>>>>>> 1ba823e (docs: remove references to POC Tiago from README)
 ### Angular 21 + FastAPI (Python) + SQLite
 
-Este repositório contém uma Prova de Conceito (POC) de autenticação e gerenciamento de usuários desenvolvida para demonstrar uma integração limpa entre um frontend moderno em **Angular 21** e um backend robusto em **FastAPI (Python)**, utilizando **SQLite** como banco de dados embarcado.
+Este repositório contém um projeto de demonstração de autenticação e gerenciamento de usuários desenvolvido para demonstrar uma integração limpa entre um frontend moderno em **Angular 21** e um backend robusto em **FastAPI (Python)**, utilizando **SQLite** como banco de dados embarcado.
+
 
 A estrutura foi projetada para ser simples, auto-contida e fácil de rodar localmente com um único comando.
 
@@ -12,8 +20,9 @@ A estrutura foi projetada para ser simples, auto-contida e fácil de rodar local
 O workspace é dividido em duas partes principais conectadas por um inicializador inteligente na raiz:
 
 ```text
-POC-TIAGO/
+demo-bradesco/
 ├── backend/               # Servidor API FastAPI
+
 │   ├── main.py            # Endpoints e inicialização do app FastAPI
 │   ├── database.py        # Configurações do banco SQLite e seed inicial
 │   ├── requirements.txt   # Dependências Python
@@ -41,7 +50,8 @@ Certifique-se de possuir instalado em sua máquina:
 
 Para facilitar o desenvolvimento, fornecemos um script unificado em Python (`run.py`) que inicializa tanto o backend quanto o frontend em processos separados e exibe as informações agregadas em seu terminal.
 
-1. **Abra o terminal na raiz do projeto** (`POC-TIAGO`).
+1. **Abra o terminal na raiz do projeto** (`demo-bradesco`).
+
 2. **Execute o inicializador**:
    ```bash
    python run.py
@@ -92,13 +102,14 @@ npm run start
 
 ---
 
-## 🛡️ Funcionalidades da POC
+## 🛡️ Funcionalidades do Projeto
 
 - **Tela de Login**: Validação e autenticação de usuários contra a base SQLite.
 - **Tela de Registro**: Cadastro de novos usuários com validação básica no backend.
 - **Armazenamento Seguro**: Persistência simples utilizando SQLite.
 - **Geração de Token**: Retorno de um token de autenticação simulado (Bearer) para controle de sessão.
 - **Tratamento de CORS**: Configurado para aceitar requisições vindas do frontend local.
+
 
 ---
 
