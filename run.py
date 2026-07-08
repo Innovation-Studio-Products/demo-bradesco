@@ -33,15 +33,16 @@ def run_app():
         sys.exit(1)
         
     try:
-        # Comando para rodar o uvicorn no diretório do backend
+        # Comando para rodar o uvicorn no diretório do backend via módulo python
         backend_process = subprocess.Popen(
-            [uvicorn_exe, "main:app", "--reload", "--host", "127.0.0.1", "--port", "9000"],
+            [python_exe, "-m", "uvicorn", "main:app", "--reload", "--host", "127.0.0.1", "--port", "9000"],
             cwd=backend_dir,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
             bufsize=1
         )
+
         processes.append(backend_process)
         print("🟢 Backend iniciado e rodando em: http://127.0.0.1:9000")
         print("   Documentação interativa disponível em: http://127.0.0.1:9000/docs")

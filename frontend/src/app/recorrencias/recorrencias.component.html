@@ -1,0 +1,177 @@
+<div class="page-wrapper">
+
+  <!-- Header Bradesco -->
+  <header class="page-header">
+    <div class="page-header-inner">
+      <div class="page-header-brand">
+        <span class="brand-logo">B</span>
+        <span class="brand-name">Bradesco</span>
+      </div>
+      <nav class="page-header-nav">
+        <span>Internet Banking</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero da seção -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-hero-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="page-hero-title">Central de Recorrências</h1>
+        <p class="page-hero-subtitle">Acompanhe e gerencie suas autorizações de Pix Automático</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <main class="page-content">
+
+    <!-- Skeleton loading -->
+    <div *ngIf="loading" class="skeleton-wrapper">
+      <div class="skeleton-section-title"></div>
+      <div class="skeleton-grid">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
+    </div>
+
+    <!-- Estado de erro -->
+    <div *ngIf="error && !loading" class="error-state">
+      <div class="error-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </div>
+      <p class="error-message">{{ error }}</p>
+      <button class="btn btn-primary">Tentar novamente</button>
+    </div>
+
+    <!-- Conteúdo carregado -->
+    <div *ngIf="!loading && !error">
+
+      <!-- Seção de pendentes -->
+      <ng-container *ngIf="pendentes$ | async as pendentes">
+        <section *ngIf="pendentes.length > 0" class="pending-section">
+          <div class="section-header pending-section-header">
+            <div class="section-badge-pending">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="section-title">Pendentes de aprovação</h2>
+              <p class="section-subtitle">{{ pendentes.length }} autorização(ões) aguardam sua decisão</p>
+            </div>
+          </div>
+          <div class="cards-grid">
+            <div *ngFor="let rec of pendentes" class="card card-pending">
+              <div class="card-status-strip strip-pending"></div>
+              <div class="card-header">
+                <div class="card-header-info">
+                  <span class="card-company-icon">{{ rec.beneficiario.charAt(0) }}</span>
+                  <h3 class="card-title">{{ rec.beneficiario }}</h3>
+                </div>
+                <span class="status-badge badge-pending">Aguardando aprovação</span>
+              </div>
+              <div class="card-body">
+                <p class="valor">{{ rec.valor > 0 ? ('R$ ' + rec.valor.toFixed(2).replace('.', ',')) : 'Valor variável' }}</p>
+                <div class="card-info-grid">
+                  <div class="card-info-item">
+                    <span class="info-label">Próxima cobrança</span>
+                    <span class="info-value">{{ rec.proximaCobranca | date:'dd/MM/yyyy' }}</span>
+                  </div>
+                  <div class="card-info-item">
+                    <span class="info-label">Periodicidade</span>
+                    <span class="info-value">{{ rec.periodicidade }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="actions">
+                  <button class="btn btn-primary" (click)="onAprovar(rec.id)">Aprovar</button>
+                  <button class="btn btn-outline-danger" (click)="onCancelar(rec.id)">Recusar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </ng-container>
+
+      <!-- Seção de autorizações ativas/pausadas -->
+      <ng-container *ngIf="outrasRecorrencias$ | async as outras">
+        <section *ngIf="outras.length > 0" class="recorrencias-section">
+          <div class="section-header">
+            <h2 class="section-title">Minhas autorizações</h2>
+            <p class="section-subtitle">{{ outras.length }} autorização(ões) encontrada(s)</p>
+          </div>
+          <div class="cards-grid">
+            <div *ngFor="let rec of outras" class="card" [ngClass]="'card-' + rec.status">
+              <div class="card-status-strip" [ngClass]="'strip-' + rec.status"></div>
+              <div class="card-header">
+                <div class="card-header-info">
+                  <span class="card-company-icon">{{ rec.beneficiario.charAt(0) }}</span>
+                  <h3 class="card-title">{{ rec.beneficiario }}</h3>
+                </div>
+                <span class="status-badge" [ngClass]="'badge-' + rec.status">{{ rec.status | titlecase }}</span>
+              </div>
+              <div class="card-body">
+                <p class="valor">{{ rec.valor > 0 ? ('R$ ' + rec.valor.toFixed(2).replace('.', ',')) : 'Valor variável' }}</p>
+                <div class="card-info-grid">
+                  <div class="card-info-item">
+                    <span class="info-label">Próxima cobrança</span>
+                    <span class="info-value">{{ rec.proximaCobranca | date:'dd/MM/yyyy' }}</span>
+                  </div>
+                  <div class="card-info-item">
+                    <span class="info-label">Periodicidade</span>
+                    <span class="info-value">{{ rec.periodicidade }}</span>
+                  </div>
+                </div>
+                <div *ngIf="rec.status === 'pausada'" class="paused-notice">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="10 15 10 9"/><polyline points="14 15 14 9"/></svg>
+                  Pausada por você em {{ rec.dataPausa | date:'dd/MM/yyyy' }}
+                </div>
+              </div>
+              <div class="card-footer">
+                <ng-container [ngSwitch]="rec.status">
+                  <div *ngSwitchCase="'ativa'" class="actions">
+                    <button class="btn btn-outline" (click)="onPausar(rec.id)">Pausar</button>
+                    <button class="btn btn-outline-danger" (click)="onCancelar(rec.id)">Cancelar</button>
+                  </div>
+                  <div *ngSwitchCase="'pausada'" class="actions">
+                    <button class="btn btn-primary" (click)="onAprovar(rec.id)">Retomar</button>
+                    <button class="btn btn-outline-danger" (click)="onCancelar(rec.id)">Cancelar</button>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </section>
+      </ng-container>
+
+      <!-- Estado vazio -->
+      <div *ngIf="!hasRecorrencias" class="empty-state">
+        <div class="empty-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="5" width="20" height="14" rx="2"/>
+            <line x1="2" y1="10" x2="22" y2="10"/>
+          </svg>
+        </div>
+        <h2>Você ainda não possui recorrências</h2>
+        <p>Quando uma empresa solicitar uma autorização de Pix Automático, ela aparecerá aqui para sua aprovação.</p>
+      </div>
+
+    </div>
+  </main>
+
+</div>

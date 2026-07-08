@@ -1,0 +1,566 @@
+/* =========================================
+   PAGE WRAPPER
+   ========================================= */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Bradesco Sans", "Inter", system-ui, -apple-system, sans-serif;
+  background-color: #F1F3F5;
+}
+
+/* =========================================
+   TOPBAR - Fundo vermelho Bradesco
+   ========================================= */
+.page-header {
+  background-color: var(--bradesco-red);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.page-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  background: white;
+  color: var(--bradesco-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.page-header-nav {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.875rem;
+}
+
+/* =========================================
+   HERO DA SEÇÃO
+   ========================================= */
+.page-hero {
+  background: white;
+  border-bottom: 3px solid var(--bradesco-red);
+}
+
+.page-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.75rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.page-hero-icon {
+  width: 52px;
+  height: 52px;
+  background-color: var(--bradesco-red-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--bradesco-red);
+}
+
+.page-hero-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.page-hero-title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1.2;
+}
+
+.page-hero-subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: var(--gray-500);
+}
+
+/* =========================================
+   CONTEÚDO PRINCIPAL
+   ========================================= */
+.page-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+  flex: 1;
+}
+
+/* =========================================
+   SECTION HEADERS
+   ========================================= */
+.section-header {
+  margin-bottom: 1.25rem;
+}
+
+.pending-section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.section-badge-pending {
+  width: 42px;
+  height: 42px;
+  background-color: var(--bradesco-red-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--bradesco-red);
+}
+
+.section-badge-pending svg {
+  width: 22px;
+  height: 22px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.section-subtitle {
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  color: var(--gray-500);
+}
+
+/* =========================================
+   SEÇÃO PENDENTES - Destaque vermelho
+   ========================================= */
+.pending-section {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--bradesco-red-border);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 16px rgba(204, 9, 47, 0.08);
+}
+
+.recorrencias-section {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-card);
+}
+
+/* =========================================
+   GRID DE CARDS
+   ========================================= */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+/* =========================================
+   CARD
+   ========================================= */
+.card {
+  background: white;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* Faixa de status no topo do card */
+.card-status-strip {
+  height: 4px;
+  width: 100%;
+}
+
+.strip-pendente_aprovacao { background-color: var(--bradesco-red); }
+.strip-pending             { background-color: var(--bradesco-red); }
+.strip-ativa               { background-color: var(--green); }
+.strip-pausada             { background-color: var(--amber); }
+
+/* Header do card */
+.card-header {
+  padding: 1rem 1.25rem 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.card-header-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.card-company-icon {
+  width: 38px;
+  height: 38px;
+  background-color: var(--bradesco-red);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================
+   STATUS BADGES
+   ========================================= */
+.status-badge {
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge-pending,
+.badge-pendente_aprovacao {
+  background-color: var(--bradesco-red-light);
+  color: var(--bradesco-red);
+}
+
+.badge-ativa {
+  background-color: var(--green-bg);
+  color: var(--green);
+}
+
+.badge-pausada {
+  background-color: var(--amber-bg);
+  color: var(--amber);
+}
+
+/* =========================================
+   BODY DO CARD
+   ========================================= */
+.card-body {
+  padding: 0.75rem 1.25rem 1rem;
+  flex-grow: 1;
+}
+
+.valor {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 0.85rem 0;
+  letter-spacing: -0.02em;
+}
+
+.card-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.card-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.info-label {
+  font-size: 0.72rem;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.info-value {
+  font-size: 0.875rem;
+  color: var(--gray-700);
+  font-weight: 500;
+}
+
+.paused-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--amber-bg);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--amber);
+  font-weight: 500;
+}
+
+.paused-notice svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   FOOTER DO CARD
+   ========================================= */
+.card-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: var(--gray-100);
+  border-top: 1px solid var(--gray-200);
+}
+
+.actions {
+  display: flex;
+  gap: 0.625rem;
+  justify-content: flex-end;
+}
+
+/* =========================================
+   BOTÕES
+   ========================================= */
+.btn {
+  padding: 0.55rem 1.15rem;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.18s ease, opacity 0.18s ease, transform 0.1s ease;
+  font-family: inherit;
+  line-height: 1;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background-color: var(--bradesco-red);
+  color: white;
+  border-color: var(--bradesco-red);
+}
+
+.btn-primary:hover {
+  background-color: var(--bradesco-red-hover);
+  border-color: var(--bradesco-red-hover);
+}
+
+.btn-outline {
+  background-color: white;
+  color: var(--gray-700);
+  border-color: var(--gray-300);
+}
+
+.btn-outline:hover {
+  background-color: var(--gray-100);
+}
+
+.btn-outline-danger {
+  background-color: white;
+  color: var(--bradesco-red);
+  border-color: var(--bradesco-red);
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--bradesco-red-light);
+}
+
+/* =========================================
+   SKELETON LOADER
+   ========================================= */
+.skeleton-wrapper {
+  padding: 0;
+}
+
+.skeleton-section-title {
+  height: 22px;
+  width: 200px;
+  background: var(--gray-200);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.25rem;
+  animation: shimmer 1.5s infinite;
+  background-size: 200% 100%;
+  background-image: linear-gradient(90deg, #ececec 25%, #e0e0e0 50%, #ececec 75%);
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.skeleton-card {
+  height: 220px;
+  background-image: linear-gradient(90deg, #ececec 25%, #e0e0e0 50%, #ececec 75%);
+  background-size: 200% 100%;
+  border-radius: var(--radius-md);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* =========================================
+   ESTADO DE ERRO
+   ========================================= */
+.error-state {
+  background: white;
+  border: 1.5px solid var(--bradesco-red-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+.error-icon {
+  width: 56px;
+  height: 56px;
+  background-color: var(--bradesco-red-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: var(--bradesco-red);
+}
+
+.error-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.error-message {
+  color: var(--gray-700);
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* =========================================
+   ESTADO VAZIO
+   ========================================= */
+.empty-state {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 4rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+.empty-icon {
+  width: 64px;
+  height: 64px;
+  background-color: var(--gray-100);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  color: var(--gray-300);
+}
+
+.empty-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.empty-state h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--gray-500);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   RESPONSIVO
+   ========================================= */
+@media (max-width: 640px) {
+  .page-content {
+    padding: 1.25rem;
+  }
+
+  .page-hero-inner {
+    padding: 1.25rem;
+  }
+
+  .page-hero-title {
+    font-size: 1.3rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
