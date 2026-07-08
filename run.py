@@ -4,9 +4,9 @@ import os
 import time
 import signal
 
-def run_poc():
+def run_app():
     print("=" * 60)
-    print("        INICIALIZADOR DA POC - ANGULAR 21 + FASTAPI/SQLITE")
+    print("        INICIALIZADOR DA APLICAÇÃO - ANGULAR 21 + FASTAPI/SQLITE")
     print("=" * 60)
     
     processes = []
@@ -134,4 +134,4 @@ def run_poc():
 
 
 if __name__ == "__main__":
-    run_poc()
+    run_app()
