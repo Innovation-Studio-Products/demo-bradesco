@@ -35,7 +35,7 @@ def run_app():
     try:
         # Comando para rodar o uvicorn no diretório do backend
         backend_process = subprocess.Popen(
-            [uvicorn_exe, "main:app", "--reload", "--host", "127.0.0.1", "--port", "8000"],
+            [uvicorn_exe, "main:app", "--reload", "--host", "127.0.0.1", "--port", "9000"],
             cwd=backend_dir,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
@@ -43,8 +43,8 @@ def run_app():
             bufsize=1
         )
         processes.append(backend_process)
-        print("🟢 Backend iniciado e rodando em: http://127.0.0.1:8000")
-        print("   Documentação interativa disponível em: http://127.0.0.1:8000/docs")
+        print("🟢 Backend iniciado e rodando em: http://127.0.0.1:9000")
+        print("   Documentação interativa disponível em: http://127.0.0.1:9000/docs")
     except Exception as e:
         print(f"❌ Erro ao iniciar o backend: {e}")
         sys.exit(1)
@@ -53,9 +53,9 @@ def run_app():
     print("\n[2/2] Iniciando o Frontend Angular 21 (ng serve)...")
     try:
         # No macOS/Linux, npx está disponível diretamente na maioria dos ambientes com Node instalado.
-        # Usamos o script start do package.json para rodar o ng serve na porta 4200
+        # Usamos o script start do package.json para rodar o ng serve na porta 3000
         frontend_process = subprocess.Popen(
-            ["npm", "run", "start", "--", "--port", "4200", "--open=false"],
+            ["npm", "run", "start", "--", "--port", "3000", "--open=false"],
             cwd=frontend_dir,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
@@ -64,7 +64,7 @@ def run_app():
         )
         processes.append(frontend_process)
         print("🟢 Frontend iniciado com sucesso!")
-        print("   Acesse a aplicação no navegador em: http://localhost:4200")
+        print("   Acesse a aplicação no navegador em: http://localhost:3000")
     except Exception as e:
         print(f"❌ Erro ao iniciar o frontend: {e}")
         # Finaliza o backend se o frontend falhar
